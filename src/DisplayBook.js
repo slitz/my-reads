@@ -8,6 +8,13 @@ class DisplayBook extends Component {
 
   render () {
     const { book } = this.props
+    const moveBookOptions = [
+      { value:'move', name:'Move to...'},
+      { value:'currentlyReading', name:'Currently Reading'},
+      { value:'wantToRead', name:'Want to Read'},
+      { value:'read', name:'Read'},
+      { value:'none', name:'None'}
+    ]
     return (
       <li key={book.title}>
         <div className="book">
@@ -19,11 +26,15 @@ class DisplayBook extends Component {
             }}/>
             <div className="book-shelf-changer">
               <select>
-                <option value="move" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
+                {moveBookOptions.map((option) => (
+                  <option
+                    value={option.value}
+                    selected={book.shelf === option.value}
+                    disabled={option.value === 'move'}
+                  >
+                  {option.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
