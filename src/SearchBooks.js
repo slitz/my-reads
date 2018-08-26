@@ -54,6 +54,7 @@ class SearchBooks extends Component {
         {query !== '' && (
           <div className="search-books-results">
             <ol className="books-grid">
+              // Display books that match the query
               {displayedBooks.map((book) => (
                 <DisplayBook
                   key={book.id}

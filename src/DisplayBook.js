@@ -26,6 +26,7 @@ class DisplayBook extends Component {
               backgroundImage: `url(${book.imageLinks.thumbnail})`
             }}/>
             <div className="book-shelf-changer">
+              // Trigger the updateShelf method in app.js when value is changed
               <select onChange={(event) => onUpdateShelf(book, event.target.value)}>
                 {moveBookOptions.map((option) => (
                   <option
