@@ -7,7 +7,8 @@ import DisplayBook from './DisplayBook'
 
 class SearchBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onUpdateShelf: PropTypes.func.isRequired
   }
 
   state = {
@@ -19,7 +20,7 @@ class SearchBooks extends Component {
   }
 
   render () {
-    const { books } = this.props
+    const { books, onUpdateShelf } = this.props
     const { query } = this.state
 
     let displayedBooks
@@ -55,7 +56,9 @@ class SearchBooks extends Component {
             <ol className="books-grid">
               {displayedBooks.map((book) => (
                 <DisplayBook
+                  key={book.id}
                   book={book}
+                  onUpdateShelf={onUpdateShelf}
                 />
               ))}
             </ol>
