@@ -23,13 +23,13 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books.filter((book) => {
-                  return book.shelf === 'currentlyReading'
-                  }).map((book) => (
-                    <DisplayBook
-                      key={book.id}
-                      book={book}
-                      onUpdateShelf={onUpdateShelf}
-                    />
+                    return book.shelf === 'currentlyReading'
+                    }).map((book) => (
+                      <DisplayBook
+                        key={book.id}
+                        book={book}
+                        onUpdateShelf={onUpdateShelf}
+                      />
                   ))}
                 </ol>
               </div>
@@ -39,14 +39,14 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books.filter((book) => {
-                  return book.shelf === 'wantToRead'
-                  }).map((book) => (
-                    <DisplayBook
-                      key={book.id}
-                      book={book}
-                      onUpdateShelf={onUpdateShelf}
-                    />
-                  ))}
+                    return book.shelf === 'wantToRead'
+                    }).map((book) => (
+                      <DisplayBook
+                        key={book.id}
+                        book={book}
+                        onUpdateShelf={onUpdateShelf}
+                      />
+                    ))}
                 </ol>
               </div>
             </div>
@@ -55,14 +55,14 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books.filter((book) => {
-                  return book.shelf === 'read'
-                  }).map((book) => (
-                    <DisplayBook
-                      key={book.id}
-                      book={book}
-                      onUpdateShelf={onUpdateShelf}
-                    />
-                  ))}
+                    return book.shelf === 'read'
+                    }).map((book) => (
+                      <DisplayBook
+                        key={book.id}
+                        book={book}
+                        onUpdateShelf={onUpdateShelf}
+                      />
+                    ))}
                 </ol>
               </div>
             </div>
