@@ -4,31 +4,36 @@ import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import DisplayBook from './DisplayBook'
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
     onUpdateShelf: PropTypes.func.isRequired
   }
 
   state = {
-    query: ''
+    query: '',
+    searchResults: []
+  }
+
+  searchBooks = (query) => {
+    BooksAPI.search(query).then((books) => {
+      this.setState(state => ({
+        searchResults: books
+      }))
+    })
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query })
+    this.setState({ query: query.trim() })
+    if(query.length > 0) {
+      this.searchBooks(query)
+    }
   }
 
   render () {
-    const { books, onUpdateShelf } = this.props
-    const { query } = this.state
-
-    let displayedBooks
-    if (query) {
-      const match = new RegExp(escapeRegExp(this.state.query), 'i')
-      displayedBooks = books.filter((book) => match.test(book.title) || match.test(book.authors))
-      displayedBooks.sort(sortBy('title'))
-    }
+    const { onSearch, onUpdateShelf } = this.props
+    const { query, searchResults } = this.state
 
     return (
       <div className="search-books">
@@ -51,11 +56,11 @@ class SearchBooks extends Component {
             />
           </div>
         </div>
+        {/* Display books that match the query*/}
         {query !== '' && (
           <div className="search-books-results">
             <ol className="books-grid">
-              // Display books that match the query
-              {displayedBooks.map((book) => (
+              {searchResults.map((book) => (
                 <DisplayBook
                   key={book.id}
                   book={book}
