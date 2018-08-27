@@ -25,7 +25,7 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query })
     if(query.length > 0) {
       this.searchBooks(query)
     }
@@ -60,7 +60,7 @@ class SearchBooks extends Component {
         {query !== '' && (
           <div className="search-books-results">
             <ol className="books-grid">
-              {searchResults.map((book) => (
+              {searchResults.length > 0 && searchResults.map((book) => (
                 <DisplayBook
                   key={book.id}
                   book={book}

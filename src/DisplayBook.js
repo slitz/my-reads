@@ -20,19 +20,19 @@ class DisplayBook extends Component {
       <li key={book.title}>
         <div className="book">
           <div className="book-top">
-            <div className='book-cover' style={{
+            <div className='book-cover' style={ book.imageLinks && {
               width: `128px`,
               height: `188px`,
               backgroundImage: `url(${book.imageLinks.thumbnail})`
             }}/>
             <div className="book-shelf-changer">
-          {/* Trigger the updateShelf method in app.js when value is changed*/}
+              {/* Trigger the updateShelf method in app.js when value is changed*/}
               <select onChange={(event) => onUpdateShelf(book, event.target.value)}>
                 {moveBookOptions.map((option) => (
                   <option
                     key={option.value}
                     value={option.value}
-                    selected={book.shelf === option.value}
+                    selected={book.shelf ? book.shelf === option.value : 'none'}
                     disabled={option.value === 'move'}
                   >
                   {option.name}
