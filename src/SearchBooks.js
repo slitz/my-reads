@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import DisplayBook from './DisplayBook'
 import * as BooksAPI from './BooksAPI'
 
@@ -32,13 +30,19 @@ class SearchBooks extends Component {
   }
 
   render () {
-    const { onSearch, onUpdateShelf } = this.props
+    const { onUpdateShelf } = this.props
     const { query, searchResults } = this.state
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to="/">Close</Link>
+          <Link
+            className="close-search"
+            to={{
+              pathname: "/"
+            }}>
+            Close
+            </Link>
           <div className="search-books-input-wrapper">
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -56,7 +60,7 @@ class SearchBooks extends Component {
             />
           </div>
         </div>
-        {/* Display books that match the query*/}
+        {/* Display books that match the queery*/}
         {query !== '' && (
           <div className="search-books-results">
             <ol className="books-grid">

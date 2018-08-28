@@ -18,6 +18,10 @@ class BooksApp extends React.Component {
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(response => {
       book.shelf = shelf
+      // add book to books array if it doesn't already exist
+      if (!this.state.books.includes(book)) {
+        this.state.books.push(book)
+      }
       this.setState(state => ({
         books: state.books
       }))
@@ -29,8 +33,9 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route path="/search" render={() => (
           <SearchBooks
-            onSearch={this.searchBooks}
-            onUpdateShelf={this.updateShelf}
+            onUpdateShelf={(book, shelf) => {
+              this.updateShelf(book, shelf)
+            }}
           />
         )}/>
         <Route exact path="/" render={() => (
