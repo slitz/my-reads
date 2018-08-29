@@ -6,6 +6,7 @@ import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
   static propTypes = {
+    books: PropTypes.array.isRequired,
     onUpdateShelf: PropTypes.func.isRequired
   }
 
@@ -15,9 +16,17 @@ class SearchBooks extends Component {
   }
 
   searchBooks = (query) => {
-    BooksAPI.search(query).then((books) => {
+    BooksAPI.search(query).then((results) => {
+      // set shelf for books in search results to match shelf of books on home page
+      if(results.length > 0) {
+        this.props.books.map((bookOnHomePage) => (
+          results.map((bookInSearchResults) => (
+            bookOnHomePage.id === bookInSearchResults.id ? bookInSearchResults.shelf = bookOnHomePage.shelf : null
+          ))
+        ))
+      }
       this.setState(state => ({
-        searchResults: books
+        searchResults: results
       }))
     })
   }
